@@ -19,7 +19,7 @@ final class ViewController: UIViewController {
     private let searchBar = UISearchBar()
     private var webView: WKWebView!
     private let refreshControl = UIRefreshControl()
-    private let baseUrl = "http://www.google.com"
+    private let baseUrl = "https://corporacionherrera.com/movilapp/index.php"
     private let searchPath = "/search?q="
     
     override func viewDidLoad() {
@@ -30,8 +30,8 @@ final class ViewController: UIViewController {
         forwardButton.isEnabled = false
         
         // Search bar
-        self.navigationItem.titleView = searchBar
-        searchBar.delegate = self
+        //self.navigationItem.titleView = searchBar
+        //searchBar.delegate = self
         
         // Web view
         let webViewPrefs = WKPreferences()
@@ -48,7 +48,7 @@ final class ViewController: UIViewController {
         // Refresh control
         refreshControl.addTarget(self, action: #selector(reload), for: .valueChanged)
         webView.scrollView.addSubview(refreshControl)
-        view.bringSubview(toFront: refreshControl)
+        view.bringSubviewToFront(refreshControl)
         
         // Load url
         load(url: baseUrl)
@@ -103,7 +103,7 @@ extension ViewController: WKNavigationDelegate {
         refreshControl.endRefreshing()
         backButton.isEnabled = webView.canGoBack
         forwardButton.isEnabled = webView.canGoForward
-        view.bringSubview(toFront: refreshControl)
+        view.bringSubviewToFront(refreshControl)
     }
     
     // Start
@@ -117,7 +117,7 @@ extension ViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         
         refreshControl.beginRefreshing()
-        view.bringSubview(toFront: refreshControl)
+        view.bringSubviewToFront(refreshControl)
     }
     
 }
